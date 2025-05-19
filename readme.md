@@ -146,8 +146,8 @@ This database schema is for an **Automatic Attendance System** using SQLAlchemy 
 +---------+        +---------------+        +-----------+
 | id      |◄──┐    | id            |    ───>| id        |
 | name    |   └──+ | user_id (FK)  |   |    | name      |
-+---------+        | session_id(FK)|+──    | created_at|
-                   +--------------+        +-----------+
++---------+        | session_id(FK)|+──     | created_at|
+                   +---------------+         +-----------+
 
 ```
 
