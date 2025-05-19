@@ -4,19 +4,24 @@ A Streamlit application that uses face recognition to automatically track attend
 
 ## Features
 
-- Live webcam feed with face recognition
-- Automatic attendance recording for detected faces
-- Historical attendance records displayed in a table format
-- Supports multiple classes/sessions
-- SQLite database for persistent storage
+- 🎥 Live webcam feed with face recognition
+
+- ✅ Automatic attendance recording for detected faces
+
+- 📊 Historical attendance records displayed in a table format
+
+- 🏫 Supports multiple classes/sessions
+
+- ➕ Add new students in real time
+
+- 🗃️ SQLite database for persistent storage
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.10.13
 - Webcam/Camera connected to your computer
-- Face model files in the `models/buffalo_l/` directory:
-  - `det_10g.onnx` - Face detection model
-  - `w600k_r50.onnx` - Face recognition model
+- Download `buffalo-l` model [here](https://drive.google.com/file/d/1qXsQJ8ZT42_xSmWIYy85IcidpiZudOCB/view)
+- Save model files in the `models/` directory:
 
 ## Installation
 
@@ -24,15 +29,15 @@ A Streamlit application that uses face recognition to automatically track attend
 2. Create a virtual environment (recommended)
 
 ```bash
-python -m venv .venv --python=python3.9
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+conda create -n attendance-app python=3.10.13
+conda activate attendance-app
 ```
 
-If you have conda:
+If you don't have conda(NOT RECOMMANDED):
 
 ```bash
-conda create -n attendance-app python=3.9
-conda activate attendance-app
+python -m venv .venv --python=python3.10.13
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
 3. Install the required packages
@@ -40,11 +45,6 @@ conda activate attendance-app
 ```bash
 pip install -r requirements.txt
 ```
-
-4. Prepare the dataset
-   - Create a directory named `dataset`
-   - For each person, create a subdirectory with their name (e.g., `dataset/john`)
-   - Place clear face photos of each person in their respective directories (JPG format)
 
 ## Usage
 
@@ -60,14 +60,16 @@ streamlit run main.py
    - Extract face embeddings from the dataset (if not already done)
    - Start the webcam feed with face recognition
 
-3. To take attendance:
+3. View attendance records in the table on the right side of the screen
+
+4. To take attendance:
 
    - Enter a class name in the sidebar
    - Click "Start Attendance Capture"
-   - The system will automatically mark students as present when their faces are detected
-   - Click "Stop Attendance Capture" when done
+   - The system will internally mark students as present when their faces are detected
+   - Click "Stop Attendance Capture" when done and the attendance will be reflected in the table.
 
-4. View attendance records in the table on the right side of the screen
+5. You can add new student in the form below the attendance records.
 
 ## Project Structure
 
