@@ -138,7 +138,7 @@ This database schema is for an **Automatic Attendance System** using SQLAlchemy 
 
 ---
 
-## ER Diagram (ASCII)
+## ER Diagram
 
 ```diff
 +---------+        +---------------+        +-----------+
