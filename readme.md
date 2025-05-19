@@ -103,16 +103,60 @@ attendance_app/
 ├── dataset/                   # Face images for recognition
 ├── main.py                    # Streamlit application
 └── requirements.txt           # Dependencies
+
 ```
 
-## Extending the Application
+# Database Schema Overview
 
-- To add new students: Add their photos to the dataset folder and restart the application
-- To customize the UI: Modify the `main.py` file
-- To change database settings: Update `app/config/config.py`
+This database schema is for an **Automatic Attendance System** using SQLAlchemy ORM.
 
-## Troubleshooting
+## Tables and Fields
 
-- **Camera not working**: Check if your webcam is properly connected and not in use by another application
-- **Face not recognized**: Ensure you have clear photos in the dataset directory and that lighting conditions are good
-- **Database errors**: Delete the `attendance.db` file and restart to reset the database
+### `users` Table
+
+- `id` (Integer, Primary Key, Indexed)
+- `name` (String, Unique, Indexed, Not Null)
+
+### `sessions` Table
+
+- `id` (Integer, Primary Key, Indexed)
+- `name` (String, Unique, Not Null)
+- `created_at` (DateTime, defaults to current time)
+
+### `attendance` Table
+
+- `id` (Integer, Primary Key, Indexed)
+- `user_id` (Integer, Foreign Key → users.id, Not Null)
+- `session_id` (Integer, Foreign Key → sessions.id, Not Null)
+- **Unique Constraint**: `(user_id, session_id)`
+
+## Relationships
+
+- A `User` can attend many `Sessions`
+- A `Session` can have many `Users`
+- `Attendance` is the join table mapping many-to-many relationship between `User` and `Session`
+
+---
+
+## ER Diagram (ASCII)
+
+```diff
++---------+        +---------------+        +-----------+
+|  users  |        |  attendance   |        | sessions  |
++---------+        +---------------+        +-----------+
+| id      |◄──┐    | id            |    ───>| id        |
+| name    |   └──+ | user_id (FK)  |   |    | name      |
++---------+        | session_id(FK)|+──    | created_at|
+                   +--------------+        +-----------+
+
+```
+
+# Troubleshooting
+
+```bash
+conda install -c conda-forge libstdcxx-ng
+```
+
+```bash
+sudo dnf install gtk3-devel pkgconf-pkg-config
+```
